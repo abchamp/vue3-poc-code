@@ -1,45 +1,69 @@
 class AppFifoAsyncQueue {
-  queuing = [];
-  workingOnPromise = false;
+  _queuing = [];
+  _working = false;
+  _autoNext = false;
+  _cId = "";
 
-  queue(promise, params, resolve, reject) {
-    this.queuing.push({ promise, params, resolve, reject });
+  constructor(runAuto) {
+    this._autoNext = runAuto;
+  }
+
+  status() {
+    return {
+      run: this._working,
+      count: this._queuing.length,
+      _cId: this._cId,
+    };
+  }
+
+  enqueue(promise, params, resolve, reject) {
+    this._queuing.push({ promise, params, resolve, reject });
   }
 
   next() {
+    if (this._working) {
+      return !this._working;
+    }
+
     this.dequeue();
   }
 
   clear() {
-    this.queue = [];
-    this.workingOnPromise = false;
+    this._queuing = [];
+    this._working = false;
   }
 
-  afterPromise(item, resolve, data) {
-    this.workingOnPromise = false;
+  afterPromiseHandler(item, resolve, data) {
+    this._working = false;
     if (resolve) item.resolve(data);
     else item.reject(data);
+    if (this._autoNext) {
+      this.dequeue();
+    }
   }
 
   dequeue() {
-    if (this.workingOnPromise) {
+    if (this._working) {
       return false;
     }
 
-    const item = this.queuing.shift();
+    const item = this._queuing.shift();
     if (!item) {
       return false;
     }
 
     try {
-      this.workingOnPromise = true;
+      this._working = true;
+      this._cId = item.params["id"];
       item
         .promise(item.params)
-        .then((value) => this.afterPromise(item, true, value))
-        .catch((errValue) => this.afterPromise(item, false, errValue));
+        .then((value) => this.afterPromiseHandler(item, true, value))
+        .catch((errValue) => this.afterPromiseHandler(item, false, errValue));
     } catch (error) {
-      this.afterPromise(item, false, error);
+      this.afterPromiseHandler(item, false, error);
     }
     return true;
   }
 }
+
+export default AppFifoAsyncQueue;
