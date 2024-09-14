@@ -1,10 +1,12 @@
 <script setup>
+import AsyncAPICallWorker from "./components/AsyncAPICallWorker.vue";
 import RequestSyncApp from "./components/RequestSyncApp.vue";
 </script>
 
 <template>
   <div>
-    <RequestSyncApp></RequestSyncApp>
+    <AsyncAPICallWorker></AsyncAPICallWorker>
+    <!-- <RequestSyncApp></RequestSyncApp> -->
   </div>
 </template>
 
