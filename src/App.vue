@@ -1,19 +1,21 @@
 <template>
   <div>
-    <h1>Title Composable</h1>
-    <input v-model="title" type="text" />
+    <!-- <h1>Title Composable</h1> -->
+    <!-- <input v-model="title" type="text" /> -->
     <!-- <AsyncAPICallWorker></AsyncAPICallWorker> -->
     <!-- <RequestSyncApp></RequestSyncApp> -->
-    <div>
+    <!-- <div>
       <p>Mouse position is at: {{ x }} {{ y }}</p>
       <p>Count {{ count }}</p>
-    </div>
+    </div> -->
+    <QueueAsyncApi />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useTitle, useRefHistory } from "@vueuse/core";
+import QueueAsyncApi from "./components/QueueAsyncApi.vue";
 import AsyncAPICallWorker from "./components/AsyncAPICallWorker.vue";
 import RequestSyncApp from "./components/RequestSyncApp.vue";
 
