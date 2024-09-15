@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>AsyncAPICallWorker</p>
+    <p class="text-lg">AsyncAPICallWorker</p>
     <button @click="start">Start</button>
     <button @click="stop">Stop</button>
     <h1>Trending</h1>
@@ -16,14 +16,15 @@
 </template>
 
 <script setup>
+// import "../output.css";
 import { ref, onBeforeUnmount, onMounted } from "vue";
 import AsyncAPILoadWorker from "../asyncAPILoadWorker?worker";
-
+const worker = new AsyncAPILoadWorker();
 const coins = ref([]);
-if (typeof Worker !== "undefined") {
-  const worker = new AsyncAPILoadWorker();
-} else {
-}
+// if (typeof Worker !== "undefined") {
+//   const worker = new AsyncAPILoadWorker();
+// } else {
+// }
 
 worker.onmessage = (e) => {
   coins.value = e.data;
@@ -44,3 +45,7 @@ function stop() {
   worker.postMessage("");
 }
 </script>
+
+<style scoped>
+@import "../output.css";
+</style>
