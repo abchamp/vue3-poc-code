@@ -8,7 +8,8 @@
       <p>Mouse position is at: {{ x }} {{ y }}</p>
       <p>Count {{ count }}</p>
     </div> -->
-    <QueueAsyncApi />
+    <!-- <QueueAsyncApi /> -->
+    <ReactiveDemo />
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import { useTitle, useRefHistory } from "@vueuse/core";
 import QueueAsyncApi from "./components/QueueAsyncApi.vue";
 import AsyncAPICallWorker from "./components/AsyncAPICallWorker.vue";
 import RequestSyncApp from "./components/RequestSyncApp.vue";
+import ReactiveDemo from "./components/ReactiveDemo.vue";
 
 import { useMouse } from "./composables/mouse";
 import { useMyTitle } from "./composables/myTitle";
