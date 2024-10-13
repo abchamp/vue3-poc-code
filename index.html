@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,7 +7,17 @@
     <title>Vite + Vue</title>
   </head>
   <body>
+    <button id="callCusEvent">CALL CustomerEventt</button>
     <div id="app"></div>
+    <script>
+      const callCusEvent = document.getElementById("callCusEvent");
+      function sendingToVue() {
+        window.dispatchEvent(
+          new CustomEvent("externalEvent", { detail: "Some data" })
+        );
+      }
+      callCusEvent.addEventListener("click", sendingToVue);
+    </script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

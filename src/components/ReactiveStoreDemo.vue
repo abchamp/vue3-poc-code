@@ -11,7 +11,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useTodoStore } from "../store/todoStore";
-import { computed } from "vue";
+import { computed, onMounted, onBeforeUnmount } from "vue";
 
 const todoStore = useTodoStore();
 
@@ -19,5 +19,17 @@ const todoStore = useTodoStore();
 
 const p = computed(() => {
   return todoStore.shlReactiveData;
+});
+
+function handleExternalEvent(event) {
+  console.log("Received external event:", event.detail);
+}
+
+onMounted(() => {
+  window.addEventListener("externalEvent", handleExternalEvent);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("externalEvent", handleExternalEvent);
 });
 </script>
