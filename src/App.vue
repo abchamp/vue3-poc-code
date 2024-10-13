@@ -9,7 +9,8 @@
       <p>Count {{ count }}</p>
     </div> -->
     <!-- <QueueAsyncApi /> -->
-    <ReactiveDemo />
+    <!-- <ReactiveDemo /> -->
+    <ReactiveStoreDemo />
   </div>
 </template>
 
@@ -20,6 +21,7 @@ import QueueAsyncApi from "./components/QueueAsyncApi.vue";
 import AsyncAPICallWorker from "./components/AsyncAPICallWorker.vue";
 import RequestSyncApp from "./components/RequestSyncApp.vue";
 import ReactiveDemo from "./components/ReactiveDemo.vue";
+import ReactiveStoreDemo from "./components/ReactiveStoreDemo.vue";
 
 import { useMouse } from "./composables/mouse";
 import { useMyTitle } from "./composables/myTitle";
